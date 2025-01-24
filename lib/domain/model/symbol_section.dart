@@ -19,4 +19,12 @@ class SymbolSection {
               (e) => Article.fromJson(e),
             )
             .toList();
+
+  Map<String, dynamic> toJson() {
+    return {
+      'value': value,
+      'text': text,
+      'articles': articles.map((article) => article.toJson()).toList(),
+    };
+  }
 }

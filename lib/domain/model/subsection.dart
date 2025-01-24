@@ -31,4 +31,13 @@ class Subsection {
                   (e) => Article.fromJson(e),
                 )
                 .toList();
+
+  Map<String, dynamic> toJson() {
+    return {
+      'value': value,
+      'text': text,
+      'symbols': symbols?.map((symbol) => symbol.toJson()).toList(),
+      'articles': articles?.map((article) => article.toJson()).toList(),
+    };
+  }
 }

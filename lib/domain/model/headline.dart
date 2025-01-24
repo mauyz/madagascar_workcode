@@ -31,4 +31,13 @@ class Headline {
                   (e) => Article.fromJson(e),
                 )
                 .toList();
+
+  Map<String, dynamic> toJson() {
+    return {
+      'value': value,
+      'text': text,
+      'chapters': chapters?.map((chapter) => chapter.toJson()).toList(),
+      'articles': articles?.map((article) => article.toJson()).toList(),
+    };
+  }
 }
