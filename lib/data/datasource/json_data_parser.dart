@@ -1,19 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/services.dart';
+import 'package:madagascar_workcoode/domain/model/article.dart';
 import 'package:madagascar_workcoode/domain/model/work_code.dart';
 
-class JsonParser {
-  static JsonParser? _instance;
+class JsonDataParser {
+  static JsonDataParser? _instance;
   static WorkCode? _data;
 
-  JsonParser._internal();
+  JsonDataParser._internal();
 
-  static JsonParser get instance {
-    return _instance ??= JsonParser._internal();
+  static JsonDataParser get instance {
+    return _instance ??= JsonDataParser._internal();
   }
 
- Future<WorkCode> parseJson() async{
+  Future<WorkCode> parse() async {
     if (_data == null) {
       final jsonData = await rootBundle.loadString("assets/data.json");
       final map = jsonDecode(jsonData) as Map<String, dynamic>;
@@ -22,7 +24,18 @@ class JsonParser {
     return Future.value(_data);
   }
 
-  Future<WorkCode> fixJson() async{
+  Future<List<Article>> search(String word) async {
+    final articles = <Article>[];
+    _data ??= await parse();
+    for (final article in _data!.allArticles) {
+      if (article.content.toLowerCase().contains(word.toLowerCase())) {
+        articles.add(article);
+      }
+    }
+    return articles;
+  }
+
+  Future<WorkCode> fix() async {
     if (_data == null) {
       final jsonData = await File("data.json").readAsString();
       final map = jsonDecode(jsonData) as Map<String, dynamic>;
@@ -31,7 +44,7 @@ class JsonParser {
     return Future.value(_data);
   }
 
-  Future persistJson() async {
+  Future persist() async {
     File newFile = File("data_1.json");
     final jsonData = jsonEncode(_data);
     await newFile.writeAsString(jsonData);
