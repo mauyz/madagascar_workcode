@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:madagascar_workcoode/app/app.dart';
 import 'package:madagascar_workcoode/app/service_locator.dart';
 
-void main() {
-  setupLocator();
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupLocator();
   runApp(const App());
 }
