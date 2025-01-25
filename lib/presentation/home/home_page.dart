@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:madagascar_workcoode/presentation/explorer/explorer_page.dart';
 import 'package:madagascar_workcoode/presentation/home/navigation_cubit.dart';
+import 'package:madagascar_workcoode/presentation/pdf/pdf_view_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,7 +14,7 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           elevation: 2,
-          title: Text("Code de travail"),
+          title: Text("Code du travail"),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
@@ -28,8 +29,11 @@ class HomePage extends StatelessWidget {
           ],
         ),
         body: BlocBuilder<NavigationCubit, int>(builder: (context, page) {
-          if(page == 0) {
+          if (page == 0) {
             return ExplorerPage();
+          }
+          if(page == 1) {
+            return PdfViewPage();
           }
           return Center(
             child: FilledButton(onPressed: () {}, child: Text("Page $page")),
