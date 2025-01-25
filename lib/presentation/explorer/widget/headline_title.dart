@@ -42,7 +42,7 @@ class HeadlineTitle extends StatelessWidget {
                       debugPrint(article.title);
                     },
                     backgroundColor: Theme.of(context).colorScheme.primary,
-                    flexWeights: const <int>[2, 2, 2],
+                    flexWeights: const <int>[2, 2, 2, 2],
                     consumeMaxWeight: true,
                     children: headline.allArticles.map(
                       (e) {
