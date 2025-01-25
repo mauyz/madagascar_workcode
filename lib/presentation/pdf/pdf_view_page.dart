@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:madagascar_workcoode/app/service_locator.dart';
+import 'package:madagascar_workcoode/core/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
