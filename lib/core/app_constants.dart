@@ -15,7 +15,7 @@ class AppConstants {
   static const appClause =
       "Clause de non-responsabilité :\nCette application n'est pas affiliée à "
       "une entité gouvernementale et ne représente pas une autorité officielle.\n"
-      "Elle vise à offrir un accès simplifié au Code du travail "
+      "Elle vise à offrir un accès simplifié au code du travail "
       "pour des fins informatives et éducatives uniquement.";
 
   static final copyright = "© ${DateTime.now().year} Moïse T.";

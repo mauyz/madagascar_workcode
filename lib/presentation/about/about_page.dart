@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:madagascar_workcoode/core/app_constants.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -11,59 +16,56 @@ class AboutPage extends StatelessWidget {
     final ThemeData themeData = Theme.of(context);
     return SingleChildScrollView(
       child: Column(
+        spacing: 2,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          ColoredBox(
-            color: themeData.colorScheme.secondaryContainer,
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                children: [
-                  Flexible(
-                    child: CircleAvatar(
-                      backgroundColor:themeData.colorScheme.inversePrimary,
-                      child: IconTheme(
-                        data: themeData.iconTheme,
-                        child: Icon(Icons.assured_workload),
-                      ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+                Flexible(
+                  child: CircleAvatar(
+                    child: IconTheme(
+                      data: themeData.iconTheme,
+                      child: Icon(Icons.assured_workload),
                     ),
                   ),
-                  Flexible(
-                    flex: 3,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppConstants.appTitle,
-                            style: themeData.textTheme.titleMedium,
-                          ),
-                          Text(
-                            AppConstants.appVersion,
-                            style: themeData.textTheme.titleSmall,
-                          ),
-                        ],
-                      ),
+                ),
+                Flexible(
+                  flex: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          AppConstants.appTitle,
+                          style: themeData.textTheme.titleSmall,
+                        ),
+                        Text(
+                          AppConstants.appVersion,
+                          style: themeData.textTheme.titleSmall,
+                        ),
+                      ],
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.only(
+              left: 10.0,
+              right: 10,
+              bottom: 20,
+            ),
             child: ListBody(
               children: <Widget>[
-                const SizedBox(
-                  height: 15.0,
-                ),
                 SelectableLinkify(
-                  text:
-                      "${AppConstants.aboutApp} \n\n${AppConstants.appClause}"
-                      "\n\nContact du développeur : ${AppConstants.mauyzEmail}",
+                  text: "${AppConstants.aboutApp} \n\n${AppConstants.appClause}"
+                      "\n\nMail : ${AppConstants.mauyzEmail}",
                   style: themeData.textTheme.bodySmall,
                   onOpen: (link) async {
                     if (await canLaunchUrl(Uri.parse(link.url))) {
@@ -72,7 +74,7 @@ class AboutPage extends StatelessWidget {
                   },
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
+                  padding: const EdgeInsets.only(top: 10.0),
                   child: Text(
                     AppConstants.copyright,
                     style: const TextStyle(
@@ -87,9 +89,26 @@ class AboutPage extends StatelessWidget {
           Material(
             color: themeData.colorScheme.secondaryContainer,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                _sendReport();
+              },
               child: Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(10.0),
+                child: const Text(
+                  "Contacter le développeur",
+                  textAlign: TextAlign.start,
+                ),
+              ),
+            ),
+          ),
+          Material(
+            color: themeData.colorScheme.secondaryContainer,
+            child: InkWell(
+              onTap: () {
+                _shareApp();
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
                 child: const Text(
                   "Partager",
                   textAlign: TextAlign.start,
@@ -97,12 +116,11 @@ class AboutPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 2),
           Material(
             color: themeData.colorScheme.secondaryContainer,
             child: InkWell(
               child: Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(10.0),
                 child: const Text(
                   "Voir licences",
                 ),
@@ -127,5 +145,42 @@ class AboutPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _sendReport() async {
+    final email = Email(
+      recipients: [
+        AppConstants.mauyzEmail,
+      ],
+    );
+    try {
+      await FlutterEmailSender.send(email);
+    } catch (_) {
+      final uri = Uri(
+        scheme: 'mailto',
+        path: AppConstants.mauyzEmail,
+      );
+      launchUrlString(uri.toString());
+    }
+  }
+
+  void _shareApp() async {
+    await Share.share(_getAppLink());
+  }
+
+  String _getAppLink() {
+    if (Platform.isIOS) {
+      //TODO
+    }
+    if (Platform.isLinux) {
+      ///TODO
+    }
+    if (Platform.isWindows) {
+      ///TODO
+    }
+    if (Platform.isMacOS) {
+      ///TODO
+    }
+    return AppConstants.playStoreLink;
   }
 }
