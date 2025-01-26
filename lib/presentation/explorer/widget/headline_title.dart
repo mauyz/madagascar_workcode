@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:madagascar_workcoode/domain/model/headline.dart';
 
 class HeadlineTitle extends StatelessWidget {
@@ -39,9 +40,10 @@ class HeadlineTitle extends StatelessWidget {
                   child: CarouselView.weighted(
                     onTap: (value) {
                       final article = headline.allArticles[value];
-                      debugPrint(article.title);
+                      context.go("/articles/${article.number}");
                     },
-                    backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
                     flexWeights: const <int>[2, 2, 2],
                     consumeMaxWeight: true,
                     children: headline.allArticles.map(
