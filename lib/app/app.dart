@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:madagascar_workcoode/app/bloc/dark_mode_cubit.dart';
 import 'package:madagascar_workcoode/app/router.dart';
 import 'package:madagascar_workcoode/core/service_locator.dart';
+import 'package:madagascar_workcoode/presentation/explorer/bloc/explorer_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class App extends StatelessWidget {
@@ -11,10 +12,18 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<DarkModeCubit>(
-      create: (_) => DarkModeCubit(
-        locator.get<SharedPreferences>().getBool("darkMode") ?? false,
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<DarkModeCubit>(
+          create: (_) => DarkModeCubit(
+            locator.get<SharedPreferences>().getBool("darkMode") ?? false,
+          ),
+        ),
+        BlocProvider<ExplorerBloc>(
+          lazy: false,
+          create: (context) => ExplorerBloc(),
+        ),
+      ],
       child: BlocBuilder<DarkModeCubit, bool>(
         builder: (context, mode) {
           return MaterialApp.router(
