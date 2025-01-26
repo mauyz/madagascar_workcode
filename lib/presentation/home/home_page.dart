@@ -41,8 +41,8 @@ class HomePage extends StatelessWidget {
                   },
                   icon: Icon(
                     Theme.of(context).brightness == Brightness.dark
-                        ? Icons.light
-                        : Icons.dark_mode,
+                        ? Icons.light_mode_outlined
+                        : Icons.dark_mode_outlined,
                   ),
                 ),
               ],
