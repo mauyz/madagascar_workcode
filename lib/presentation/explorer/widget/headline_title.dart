@@ -26,10 +26,20 @@ class HeadlineTitle extends StatelessWidget {
               spacing: 5,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
                     "${headline.value} : ${headline.text}",
                     style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 5.0),
+                  child: Text(
+                    '(Art.${headline.allArticles.first.number} - '
+                    'Art.${headline.allArticles.last.number})',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w300
+                    ),
                   ),
                 ),
                 ConstrainedBox(
