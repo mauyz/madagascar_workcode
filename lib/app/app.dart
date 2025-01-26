@@ -38,6 +38,7 @@ class App extends StatelessWidget {
               appBarTheme: AppBarTheme(
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+                titleSpacing: 0.0,
               ),
               useMaterial3: true,
             ),
