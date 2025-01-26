@@ -5,7 +5,7 @@ class AppConstants {
 
   static const mauyzEmail = "tsiorymauyz@gmail.com";
 
-  static const appTitle = "Code du travail de Madagascar";
+  static const appTitle = "Explorer le code du travail Malagasy";
   static const appVersion = "v1.0.0";
 
   static const aboutApp = "Cette loi est"
