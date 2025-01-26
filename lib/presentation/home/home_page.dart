@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:madagascar_workcoode/app/bloc/dark_mode_cubit.dart';
 import 'package:madagascar_workcoode/presentation/about/about_page.dart';
 import 'package:madagascar_workcoode/presentation/explorer/explorer_page.dart';
 import 'package:madagascar_workcoode/presentation/home/navigation_cubit.dart';
@@ -18,20 +19,28 @@ class HomePage extends StatelessWidget {
             appBar: AppBar(
               elevation: 2,
               title: Text("Code du travail"),
-              actions: page != 2
-                  ? [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: FilledButton.tonalIcon(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.search,
-                          ),
-                          label: Text("Rechercher"),
-                        ),
-                      )
-                    ]
-                  : null,
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    BlocProvider.of<DarkModeCubit>(context).update();
+                  },
+                  icon: Icon(
+                    Theme.of(context).brightness == Brightness.dark
+                        ? Icons.light_mode
+                        : Icons.dark_mode,
+                  ),
+                ),
+                if (page != 2)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.search,
+                      ),
+                    ),
+                  ),
+              ],
             ),
             body: IndexedStack(
               index: page,
@@ -42,6 +51,7 @@ class HomePage extends StatelessWidget {
               ],
             ),
             bottomNavigationBar: NavigationBar(
+              elevation: 5,
               onDestinationSelected: (int index) {
                 context.read<NavigationCubit>().navigate(index);
               },
