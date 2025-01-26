@@ -13,36 +13,33 @@ class ExplorerPage extends StatelessWidget {
     return BlocProvider<ExplorerBloc>(
       lazy: false,
       create: (context) => ExplorerBloc(),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<ExplorerBloc, ExplorerState>(
-          builder: (context, state) {
-            return switch (state) {
-              ExplorerLoading() => Center(
-                  child: CircularProgressIndicator(),
+      child: BlocBuilder<ExplorerBloc, ExplorerState>(
+        builder: (context, state) {
+          return switch (state) {
+            ExplorerLoading() => Center(
+                child: CircularProgressIndicator(),
+              ),
+            ExplorerFailed() => Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 10,
+                  children: [
+                    Text("Impossible de charger les données"),
+                    FilledButton(
+                      onPressed: () {
+                        BlocProvider.of<ExplorerBloc>(context)
+                            .add(ExplorerLoadEvent());
+                      },
+                      child: Text("Réessayer"),
+                    )
+                  ],
                 ),
-              ExplorerFailed() => Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 10,
-                    children: [
-                      Text("Impossible de charger les données"),
-                      FilledButton(
-                        onPressed: () {
-                          BlocProvider.of<ExplorerBloc>(context)
-                              .add(ExplorerLoadEvent());
-                        },
-                        child: Text("Réessayer"),
-                      )
-                    ],
-                  ),
-                ),
-              ExplorerSuccess() => HeadlineListview(
-                  headlines: state.workCode.headlines,
-                ),
-            };
-          },
-        ),
+              ),
+            ExplorerSuccess() => HeadlineListview(
+                headlines: state.workCode.headlines,
+              ),
+          };
+        },
       ),
     );
   }
