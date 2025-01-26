@@ -7,12 +7,9 @@ class IntroductionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(2.0),
-      child: Card(
-        elevation: 2.0,
+      child: Material(
+        elevation: 2,
         child: InkWell(
-          borderRadius: BorderRadius.all(
-            Radius.circular(12.0),
-          ),
           onTap: () {},
           child: Padding(
             padding: const EdgeInsets.symmetric(

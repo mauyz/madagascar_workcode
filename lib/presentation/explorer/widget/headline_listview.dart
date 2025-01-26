@@ -13,14 +13,18 @@ class HeadlineListview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: headlines.length + 1,
-      itemBuilder: (context, index) {
-          if(index == 0) {
-            return IntroductionTitle();
-          }
-          return HeadlineTitle(headline: headlines[index - 1]);
-      },
+    final ScrollController controller = ScrollController();
+    return Scrollbar(
+      controller: controller,
+      child: ListView.builder(
+        itemCount: headlines.length + 1,
+        itemBuilder: (context, index) {
+            if(index == 0) {
+              return IntroductionTitle();
+            }
+            return HeadlineTitle(headline: headlines[index - 1]);
+        },
+      ),
     );
   }
 }
