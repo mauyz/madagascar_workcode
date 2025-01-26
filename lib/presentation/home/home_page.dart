@@ -17,29 +17,34 @@ class HomePage extends StatelessWidget {
         builder: (context, page) {
           return Scaffold(
             appBar: AppBar(
+              leading: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.assured_workload,
+                ),
+              ),
               elevation: 2,
-              title: Text("Code du travail"),
+              title: Text(
+                "Code du travail",
+              ),
               actions: [
+                if (page != 2)
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.search_rounded,
+                    ),
+                  ),
                 IconButton(
                   onPressed: () {
                     BlocProvider.of<DarkModeCubit>(context).update();
                   },
                   icon: Icon(
                     Theme.of(context).brightness == Brightness.dark
-                        ? Icons.light_mode
+                        ? Icons.light
                         : Icons.dark_mode,
                   ),
                 ),
-                if (page != 2)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.search,
-                      ),
-                    ),
-                  ),
               ],
             ),
             body: IndexedStack(
