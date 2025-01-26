@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:madagascar_workcoode/presentation/article/article_content_page.dart';
+import 'package:madagascar_workcoode/presentation/headline/introduction_page.dart';
 import 'package:madagascar_workcoode/presentation/home/home_page.dart';
 import 'package:madagascar_workcoode/presentation/not_found_page.dart';
 
@@ -23,6 +24,12 @@ final router = GoRouter(
               } catch (_) {}
             }
             return NotFoundPage();
+          },
+        ),
+        GoRoute(
+          path: "/intro",
+          builder: (context, state) {
+            return IntroductionPage();
           },
         ),
       ],

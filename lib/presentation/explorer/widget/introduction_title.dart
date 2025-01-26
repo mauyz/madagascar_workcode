@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class IntroductionTitle extends StatelessWidget {
   const IntroductionTitle({super.key});
@@ -10,7 +11,9 @@ class IntroductionTitle extends StatelessWidget {
       child: Material(
         elevation: 2,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            context.go("/intro");
+          },
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 15,
