@@ -12,7 +12,7 @@ class HeadlineTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(2.0),
       child: Card(
         elevation: 2.0,
         child: InkWell(
@@ -35,23 +35,20 @@ class HeadlineTitle extends StatelessWidget {
                   ),
                 ),
                 ConstrainedBox(
-                  constraints: const BoxConstraints(maxHeight: 60),
+                  constraints: const BoxConstraints(maxHeight: 40),
                   child: CarouselView.weighted(
                     onTap: (value) {
                       final article = headline.allArticles[value];
                       debugPrint(article.title);
                     },
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    flexWeights: const <int>[2, 2, 2, 2],
+                    backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                    flexWeights: const <int>[2, 2, 2],
                     consumeMaxWeight: true,
                     children: headline.allArticles.map(
                       (e) {
                         return Center(
                           child: Text(
                             "Art. ${e.number}",
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
                           ),
                         );
                       },
