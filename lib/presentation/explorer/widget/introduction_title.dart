@@ -9,7 +9,8 @@ class IntroductionTitle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Material(
-        elevation: 2,
+        shadowColor: Colors.red,
+        elevation: 1,
         child: InkWell(
           onTap: () {
             context.go("/intro");

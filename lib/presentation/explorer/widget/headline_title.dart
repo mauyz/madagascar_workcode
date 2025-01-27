@@ -4,10 +4,12 @@ import 'package:madagascar_workcoode/domain/model/headline.dart';
 
 class HeadlineTitle extends StatelessWidget {
   final Headline headline;
+  final int index;
 
   const HeadlineTitle({
     super.key,
     required this.headline,
+    required this.index,
   });
 
   @override
@@ -15,9 +17,12 @@ class HeadlineTitle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Material(
-        elevation: 2,
+        shadowColor: Colors.red,
+        elevation: 1,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            context.go("/headlines/$index");
+          },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
