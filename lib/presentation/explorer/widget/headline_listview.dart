@@ -19,10 +19,13 @@ class HeadlineListview extends StatelessWidget {
       child: ListView.builder(
         itemCount: headlines.length + 1,
         itemBuilder: (context, index) {
-            if(index == 0) {
-              return IntroductionTitle();
-            }
-            return HeadlineTitle(headline: headlines[index - 1]);
+          if (index == 0) {
+            return IntroductionTitle();
+          }
+          return HeadlineTitle(
+            headline: headlines[index - 1],
+            index: index,
+          );
         },
       ),
     );
