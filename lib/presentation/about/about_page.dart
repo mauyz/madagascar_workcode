@@ -28,29 +28,43 @@ class AboutPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
+                    padding: const EdgeInsets.only(
+                      left: 10,
                     ),
-                    child: ListBody(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
+                          child: Row(
                             children: [
-                              Flexible(
+                              CircleAvatar(
+                                backgroundColor:
+                                    themeData.colorScheme.onPrimary,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 8.0,
-                                  ),
-                                  child: Text(
-                                    AppConstants.appTitle,
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Image.asset(
+                                    "assets/icon.png",
                                   ),
                                 ),
                               ),
                               Flexible(
-                                child: Text(
-                                  AppConstants.appVersion,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        AppConstants.appTitle,
+                                      ),
+                                      Text(
+                                        AppConstants.appVersion,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -156,9 +170,11 @@ class AboutPage extends StatelessWidget {
                           applicationName: AppConstants.appTitle,
                           applicationVersion: AppConstants.appVersion,
                           applicationIcon: CircleAvatar(
-                            child: IconTheme(
-                              data: themeData.iconTheme,
-                              child: Icon(Icons.assured_workload),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Image.asset(
+                                "assets/icon.png",
+                              ),
                             ),
                           ),
                           applicationLegalese:
