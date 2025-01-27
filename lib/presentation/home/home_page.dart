@@ -18,12 +18,7 @@ class HomePage extends StatelessWidget {
         builder: (context, page) {
           return Scaffold(
             appBar: AppBar(
-              leading: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.assured_workload,
-                ),
-              ),
+              titleSpacing: 10.0,
               elevation: 2,
               title: Text(
                 "Code du travail",
