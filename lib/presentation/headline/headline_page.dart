@@ -39,9 +39,9 @@ class HeadlinePage extends StatelessWidget {
                   title: AutoSizeText(
                     "${headline.value} : ${headline.text}",
                     maxLines: 2,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.inversePrimary,
-                        ),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
                 ),
                 body: Padding(
