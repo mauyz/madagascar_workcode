@@ -4,6 +4,7 @@ import 'package:madagascar_workcoode/presentation/headline/headline_page.dart';
 import 'package:madagascar_workcoode/presentation/headline/introduction_page.dart';
 import 'package:madagascar_workcoode/presentation/home/home_page.dart';
 import 'package:madagascar_workcoode/presentation/not_found_page.dart';
+import 'package:madagascar_workcoode/presentation/search/search_page.dart';
 
 final router = GoRouter(
   initialLocation: "/",
@@ -35,6 +36,22 @@ final router = GoRouter(
             }
             return NotFoundPage();
           },
+          routes: [
+            GoRoute(
+              path: "articles/:id",
+              builder: (context, state) {
+                final id = int.tryParse(state.pathParameters["id"] ?? '');
+                if (id != null && id > 0 && id < 396) {
+                  return ArticleContentPage(id: id);
+                }
+                return NotFoundPage();
+              },
+            ),
+          ],
+        ),
+        GoRoute(
+          path: "search",
+          builder: (context, state) => SearchPage(),
           routes: [
             GoRoute(
               path: "articles/:id",
