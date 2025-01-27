@@ -16,7 +16,7 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return ColoredBox(
-      color: themeData.colorScheme.secondaryContainer,
+      color: themeData.colorScheme.secondaryContainer.withValues(alpha: 0.5),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
