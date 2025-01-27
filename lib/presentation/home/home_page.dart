@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:madagascar_workcoode/app/bloc/dark_mode_cubit.dart';
 import 'package:madagascar_workcoode/presentation/about/about_page.dart';
 import 'package:madagascar_workcoode/presentation/explorer/explorer_page.dart';
@@ -30,7 +31,9 @@ class HomePage extends StatelessWidget {
               actions: [
                 if (page != 2)
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go("/search");
+                    },
                     icon: Icon(
                       Icons.search_rounded,
                     ),
