@@ -40,13 +40,10 @@ class AboutPage extends StatelessWidget {
                           child: Row(
                             children: [
                               CircleAvatar(
-                                backgroundColor:
-                                    themeData.colorScheme.onPrimary,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Image.asset(
-                                    "assets/icon.png",
-                                  ),
+                                maxRadius: 30,
+                                backgroundColor:Colors.transparent,
+                                child: Image.asset(
+                                  "assets/icon.png",
                                 ),
                               ),
                               Flexible(
@@ -170,11 +167,10 @@ class AboutPage extends StatelessWidget {
                           applicationName: AppConstants.appTitle,
                           applicationVersion: AppConstants.appVersion,
                           applicationIcon: CircleAvatar(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Image.asset(
-                                "assets/icon.png",
-                              ),
+                            maxRadius: 30,
+                            backgroundColor:Colors.transparent,
+                            child: Image.asset(
+                              "assets/icon.png",
                             ),
                           ),
                           applicationLegalese:
