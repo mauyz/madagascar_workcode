@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:madagascar_workcoode/presentation/explorer/bloc/explorer_bloc.dart';
 import 'package:madagascar_workcoode/presentation/explorer/bloc/explorer_state.dart';
 import 'package:madagascar_workcoode/presentation/not_found_page.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ArticleContentPage extends StatelessWidget {
   final int id;
@@ -29,6 +30,20 @@ class ArticleContentPage extends StatelessWidget {
               widget = Scaffold(
                 appBar: AppBar(
                   title: Text(article.title),
+                  actions: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 5.0),
+                      child: IconButton(
+                        onPressed: () {
+                          Share.share(
+                            "${article.title.toUpperCase()}\n\n${article.content}",
+                            subject: article.title,
+                          );
+                        },
+                        icon: Icon(Icons.share),
+                      ),
+                    ),
+                  ],
                 ),
                 body: Padding(
                   padding: const EdgeInsets.only(
