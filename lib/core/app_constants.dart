@@ -20,7 +20,7 @@ class AppConstants {
 
   static final copyright = "© ${DateTime.now().year} Moïse T.";
 
-  static const androidId = "com.eightgroup.mauyz.madagascar_workcoode";
+  static const androidId = "com.eightgroup.madagascar_workcoode";
 
   static const playStoreLink =
       "https://play.google.com/store/apps/details?id=$androidId";
