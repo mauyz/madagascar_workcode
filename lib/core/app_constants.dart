@@ -6,7 +6,7 @@ class AppConstants {
   static const mauyzEmail = "tsiorymauyz@gmail.com";
 
   static const appTitle = "Explorer le code du travail Malagasy";
-  static const appVersion = "v1.0.0";
+  static const appVersion = "v1.0.1";
 
   static const aboutApp = "Cette loi est"
       " adoptée par l’Assemblée nationale et le Sénat lors de leurs séances"
