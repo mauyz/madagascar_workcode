@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:madagascar_workcoode/presentation/explorer/bloc/explorer_bloc.dart';
 import 'package:madagascar_workcoode/presentation/explorer/bloc/explorer_state.dart';
 import 'package:madagascar_workcoode/presentation/not_found_page.dart';
+import 'package:share_plus/share_plus.dart';
 
 class IntroductionPage extends StatelessWidget {
   const IntroductionPage({super.key});
@@ -20,6 +21,20 @@ class IntroductionPage extends StatelessWidget {
           ExplorerSuccess() => Scaffold(
               appBar: AppBar(
                 title: Text("Introduction"),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5.0),
+                    child: IconButton(
+                      onPressed: () {
+                        Share.share(
+                          state.workCode.introduction,
+                          subject: "Introduction",
+                        );
+                      },
+                      icon: Icon(Icons.share),
+                    ),
+                  ),
+                ],
               ),
               body: Scrollbar(
                 thumbVisibility: true,

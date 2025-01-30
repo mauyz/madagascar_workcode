@@ -23,6 +23,9 @@ class SearchInputWidget extends StatelessWidget {
           controller: searchController,
           decoration: InputDecoration(
             filled: true,
+            fillColor: Theme.of(context).colorScheme.onPrimary.withValues(
+                  alpha: 0.5,
+                ),
             border: const OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.all(

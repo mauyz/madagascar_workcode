@@ -15,100 +15,90 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    return ColoredBox(
-      color: themeData.colorScheme.secondaryContainer.withValues(alpha: 0.5),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Expanded(
-            flex: 3,
-            child: SingleChildScrollView(
-              child: Column(
-                spacing: 10,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 10,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5.0),
-                          child: Row(
-                            children: [
-                              CircleAvatar(
-                                maxRadius: 30,
-                                backgroundColor:Colors.transparent,
-                                child: Image.asset(
-                                  "assets/icon.png",
-                                ),
-                              ),
-                              Flexible(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        AppConstants.appTitle,
-                                      ),
-                                      Text(
-                                        AppConstants.appVersion,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: SelectableLinkify(
-                            text:
-                                "${AppConstants.aboutApp} \n\n${AppConstants.appClause}"
-                                "\nMail : ${AppConstants.mauyzEmail}",
-                            style: themeData.textTheme.bodySmall,
-                            onOpen: (link) async {
-                              if (await canLaunchUrl(Uri.parse(link.url))) {
-                                launchUrl(Uri.parse(link.url));
-                              }
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
-                          child: Text(
-                            AppConstants.copyright,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          flex: 2,
+          child: SingleChildScrollView(
+            child: Column(
+              spacing: 10,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 10,
                   ),
-                ],
-              ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5.0),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              maxRadius: 30,
+                              backgroundColor: Colors.transparent,
+                              child: Image.asset(
+                                "assets/icon.png",
+                              ),
+                            ),
+                            Flexible(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      AppConstants.appTitle,
+                                    ),
+                                    Text(
+                                      AppConstants.appVersion,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 1.0),
+                        child: SelectableLinkify(
+                          text: "${AppConstants.aboutApp} "
+                              "\n\n${AppConstants.appClause}",
+                          style: themeData.textTheme.bodySmall,
+                          onOpen: (link) async {
+                            if (await canLaunchUrl(Uri.parse(link.url))) {
+                              launchUrl(Uri.parse(link.url));
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Column(
-              spacing: 1,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.end,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Flexible(
-                  child: Material(
+        ),
+        Expanded(
+          flex: 2,
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: SingleChildScrollView(
+              child: Column(
+                spacing: 1,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Divider(
+                    height: 0.1,
+                  ),
+                  Material(
                     child: InkWell(
                       onTap: () {
                         _openStore(context);
@@ -121,9 +111,10 @@ class AboutPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-                Flexible(
-                  child: Material(
+                  Divider(
+                    height: 0.1,
+                  ),
+                  Material(
                     child: InkWell(
                       onTap: () {
                         _sendReport();
@@ -136,9 +127,10 @@ class AboutPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-                Flexible(
-                  child: Material(
+                  Divider(
+                    height: 0.1,
+                  ),
+                  Material(
                     child: InkWell(
                       onTap: () {
                         _shareApp();
@@ -151,9 +143,10 @@ class AboutPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-                Flexible(
-                  child: Material(
+                  Divider(
+                    height: 0.1,
+                  ),
+                  Material(
                     child: InkWell(
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -168,7 +161,7 @@ class AboutPage extends StatelessWidget {
                           applicationVersion: AppConstants.appVersion,
                           applicationIcon: CircleAvatar(
                             maxRadius: 30,
-                            backgroundColor:Colors.transparent,
+                            backgroundColor: Colors.transparent,
                             child: Image.asset(
                               "assets/icon.png",
                             ),
@@ -179,12 +172,25 @@ class AboutPage extends StatelessWidget {
                       },
                     ),
                   ),
-                ),
-              ],
+                  Divider(
+                    height: 0.1,
+                  ),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Text(
+                        AppConstants.copyright,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.labelSmall,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

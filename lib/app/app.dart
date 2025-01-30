@@ -36,9 +36,9 @@ class App extends StatelessWidget {
                 brightness: mode ? Brightness.dark : Brightness.light,
               ),
               appBarTheme: AppBarTheme(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                foregroundColor: Theme.of(context).colorScheme.inversePrimary,
                 titleSpacing: 0.0,
+                shadowColor: Theme.of(context).colorScheme.onPrimary,
+                elevation: 1.0,
               ),
               useMaterial3: true,
             ),
