@@ -1,0 +1,4 @@
+- Explorer chaque titre (chapitre, section, sous-section,...)
+- Inclure la version PDF
+- Rechercher des mots clés
+- Changer le thème
