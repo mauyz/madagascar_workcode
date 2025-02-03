@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:madagascar_workcoode/presentation/article/article_content_page.dart';
 import 'package:madagascar_workcoode/presentation/headline/headline_page.dart';
@@ -15,52 +16,91 @@ final router = GoRouter(
       routes: [
         GoRoute(
           path: "articles/:id",
-          builder: (context, state) {
-            final id = int.tryParse(state.pathParameters["id"] ?? '');
-            if (id != null && id > 0 && id < 396) {
-              return ArticleContentPage(id: id);
-            }
-            return NotFoundPage();
+          pageBuilder: (_, state) {
+            return _buildPageWithDefaultTransition(
+              state: state,
+              child: Builder(
+                builder: (_) {
+                  final id = int.tryParse(state.pathParameters["id"] ?? '');
+                  if (id != null && id > 0 && id < 396) {
+                    return ArticleContentPage(id: id);
+                  }
+                  return NotFoundPage();
+                },
+              ),
+            );
           },
         ),
         GoRoute(
           path: "intro",
-          builder: (context, state) => IntroductionPage(),
+          pageBuilder: (_, state) {
+            return _buildPageWithDefaultTransition(
+              state: state,
+              child: IntroductionPage(),
+            );
+          },
         ),
         GoRoute(
           path: "headlines/:index",
-          builder: (context, state) {
-            final index = int.tryParse(state.pathParameters["index"] ?? '');
-            if (index != null && index > 0 && index < 12) {
-              return HeadlinePage(index: index);
-            }
-            return NotFoundPage();
+          pageBuilder: (_, state) {
+            return _buildPageWithDefaultTransition(
+              state: state,
+              child: Builder(
+                builder: (_) {
+                  final index =
+                      int.tryParse(state.pathParameters["index"] ?? '');
+                  if (index != null && index > 0 && index < 12) {
+                    return HeadlinePage(index: index);
+                  }
+                  return NotFoundPage();
+                },
+              ),
+            );
           },
           routes: [
             GoRoute(
               path: "articles/:id",
-              builder: (context, state) {
-                final id = int.tryParse(state.pathParameters["id"] ?? '');
-                if (id != null && id > 0 && id < 396) {
-                  return ArticleContentPage(id: id);
-                }
-                return NotFoundPage();
+              pageBuilder: (_, state) {
+                return _buildPageWithDefaultTransition(
+                  state: state,
+                  child: Builder(
+                    builder: (_) {
+                      final id = int.tryParse(state.pathParameters["id"] ?? '');
+                      if (id != null && id > 0 && id < 396) {
+                        return ArticleContentPage(id: id);
+                      }
+                      return NotFoundPage();
+                    },
+                  ),
+                );
               },
             ),
           ],
         ),
         GoRoute(
           path: "search",
-          builder: (context, state) => SearchPage(),
+          pageBuilder: (_, state) {
+            return _buildPageWithDefaultTransition(
+              state: state,
+              child: SearchPage(),
+            );
+          },
           routes: [
             GoRoute(
               path: "articles/:id",
-              builder: (context, state) {
-                final id = int.tryParse(state.pathParameters["id"] ?? '');
-                if (id != null && id > 0 && id < 396) {
-                  return ArticleContentPage(id: id);
-                }
-                return NotFoundPage();
+              pageBuilder: (_, state) {
+                return _buildPageWithDefaultTransition(
+                  state: state,
+                  child: Builder(
+                    builder: (_) {
+                      final id = int.tryParse(state.pathParameters["id"] ?? '');
+                      if (id != null && id > 0 && id < 396) {
+                        return ArticleContentPage(id: id);
+                      }
+                      return NotFoundPage();
+                    },
+                  ),
+                );
               },
             ),
           ],
@@ -72,3 +112,22 @@ final router = GoRouter(
     return NotFoundPage();
   },
 );
+
+CustomTransitionPage<T> _buildPageWithDefaultTransition<T>({
+  required GoRouterState state,
+  required Widget child,
+}) {
+  return CustomTransitionPage<T>(
+    key: state.pageKey,
+    child: child,
+    transitionsBuilder: (_, animation, __, child) {
+      return FadeTransition(
+        opacity: CurveTween(
+          curve: Curves.easeInOutCirc,
+        ).animate(animation),
+        child: child,
+      );
+    },
+    transitionDuration: const Duration(seconds: 1),
+  );
+}

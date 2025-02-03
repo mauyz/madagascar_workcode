@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:madagascar_workcoode/presentation/search/bloc/search_bloc.dart';
 import 'package:madagascar_workcoode/presentation/search/bloc/search_state.dart';
 import 'package:madagascar_workcoode/presentation/search/widget/search_input_widget.dart';
-import 'package:madagascar_workcoode/presentation/search/widget/searched_article_list_view.dart';
+import 'package:madagascar_workcoode/presentation/search/widget/search_result_view.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -25,14 +25,10 @@ class SearchPage extends StatelessWidget {
                 SearchLoading() => Center(
                     child: CircularProgressIndicator(),
                   ),
-                SearchSuccess() => state.articles.isNotEmpty
-                    ? SearchedArticleListView(
-                        articles: state.articles,
-                        word: state.word,
-                      )
-                    : const Center(
-                        child: Text('Aucun résultat'),
-                      )
+                SearchSuccess() => SearchResultView(
+                    articles: state.articles,
+                    word: state.word,
+                  )
               };
             },
           ),
