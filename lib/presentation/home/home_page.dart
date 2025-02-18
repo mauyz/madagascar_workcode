@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
             appBar: AppBar(
               titleSpacing: 10.0,
               elevation: 2,
-              title: Text(
+              title: const Text(
                 "Code du travail",
               ),
               actions: [
@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
                     onPressed: () {
                       context.go("/search");
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.search_rounded,
                     ),
                   ),
@@ -48,18 +48,20 @@ class HomePage extends StatelessWidget {
             body: IndexedStack(
               index: page,
               children: [
-                ExplorerPage(),
-                PdfViewPage(),
-                AboutPage(),
+                const ExplorerPage(),
+                const PdfViewPage(),
+                const AboutPage(),
               ],
             ),
             bottomNavigationBar: NavigationBar(
               elevation: 5,
               onDestinationSelected: (int index) {
-                context.read<NavigationCubit>().navigate(index);
+                if (page != index) {
+                  context.read<NavigationCubit>().navigate(index);
+                }
               },
               selectedIndex: page,
-              destinations: const <Widget>[
+              destinations: const [
                 NavigationDestination(
                   icon: Icon(Icons.list_alt),
                   label: 'Explorer',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:madagascar_workcoode/domain/model/headline.dart';
+import 'package:madagascar_workcoode/presentation/explorer/widget/articles_list_view.dart';
 
 class HeadlineTitle extends StatelessWidget {
   final Headline headline;
@@ -42,32 +43,11 @@ class HeadlineTitle extends StatelessWidget {
                   child: Text(
                     '(Art.${headline.allArticles.first.number} - '
                     'Art.${headline.allArticles.last.number})',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w300
-                    ),
+                    style: const TextStyle(fontWeight: FontWeight.w300),
                   ),
                 ),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxHeight: 40),
-                  child: CarouselView.weighted(
-                    onTap: (value) {
-                      final article = headline.allArticles[value];
-                      context.go("/articles/${article.number}");
-                    },
-                    backgroundColor:
-                        Theme.of(context).colorScheme.secondaryContainer,
-                    flexWeights: const <int>[2, 2, 2],
-                    consumeMaxWeight: true,
-                    children: headline.allArticles.map(
-                      (e) {
-                        return Center(
-                          child: Text(
-                            "Art. ${e.number}",
-                          ),
-                        );
-                      },
-                    ).toList(),
-                  ),
+                ArticlesListView(
+                  headline: headline,
                 ),
               ],
             ),
