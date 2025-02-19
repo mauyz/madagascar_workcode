@@ -1,5 +1,6 @@
 import 'package:animated_tree_view/animated_tree_view.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:madagascar_workcoode/domain/model/chapter.dart';
@@ -8,6 +9,8 @@ import 'package:madagascar_workcoode/domain/model/section.dart';
 import 'package:madagascar_workcoode/domain/model/subsection.dart';
 import 'package:madagascar_workcoode/domain/model/symbol_section.dart';
 import 'package:madagascar_workcoode/domain/model/tree_object.dart';
+import 'package:madagascar_workcoode/presentation/admob/ad_banner_cubit.dart';
+import 'package:madagascar_workcoode/presentation/admob/ad_banner_widget.dart';
 import 'package:madagascar_workcoode/presentation/explorer/bloc/explorer_bloc.dart';
 import 'package:madagascar_workcoode/presentation/explorer/bloc/explorer_state.dart';
 import 'package:madagascar_workcoode/presentation/headline/article/article_list_view.dart';
@@ -77,27 +80,41 @@ class _HeadlinePageState extends State<HeadlinePage> {
                         )
                       ],
                     ),
-                    body: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 5.0,
-                        vertical: 10,
-                      ),
-                      child: treeView
-                          ? HeadlineTreeView(
-                              tree: tree!,
-                            )
-                          : SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                spacing: 5.0,
-                                children: [
-                                  if (articles != null)
-                                    ArticleListView(articles: articles),
-                                  if (chapters != null)
-                                    ChapterListView(chapters: chapters),
-                                ],
-                              ),
+                    body: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 5.0,
+                              vertical: 10,
                             ),
+                            child: treeView
+                                ? HeadlineTreeView(
+                                    tree: tree!,
+                                  )
+                                : SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      spacing: 5.0,
+                                      children: [
+                                        if (articles != null)
+                                          ArticleListView(articles: articles),
+                                        if (chapters != null)
+                                          ChapterListView(chapters: chapters),
+                                      ],
+                                    ),
+                                  ),
+                          ),
+                        ),
+                        if (!kIsWeb)
+                          SafeArea(
+                            child: BlocProvider<AdBannerCubit>(
+                              create: (context) => AdBannerCubit(null),
+                              child: AdBannerWidget(),
+                            ),
+                          ),
+                      ],
                     ),
                   );
                 },
