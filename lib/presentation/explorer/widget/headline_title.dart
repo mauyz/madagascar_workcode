@@ -1,5 +1,6 @@
 import 'dart:math' show Random;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:madagascar_workcoode/domain/model/headline.dart';
@@ -31,7 +32,9 @@ class HeadlineTitle extends StatelessWidget {
             int numb2 = (random.nextDouble() * (11 - 1)).toInt();
             int numb3 = (random.nextDouble() * (11 - 1)).toInt();
             if (index == numb1 || index == numb2 || index == numb3) {
-              InterstitialAdManager.show();
+              if (!kIsWeb) {
+                InterstitialAdManager.show();
+              }
             }
           },
           child: Padding(
