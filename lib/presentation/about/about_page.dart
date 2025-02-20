@@ -186,9 +186,7 @@ class AboutPage extends StatelessWidget {
                   if (!kIsWeb)
                     BlocProvider<AdBannerCubit>(
                       create: (context) => AdBannerCubit(null),
-                      child: const SafeArea(
-                        child: AdBannerWidget(),
-                      ),
+                      child: const AdBannerWidget(),
                     ),
                 ],
               ),
