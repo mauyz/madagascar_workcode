@@ -5,6 +5,7 @@ import 'package:madagascar_workcoode/app/bloc/dark_mode_cubit.dart';
 import 'package:madagascar_workcoode/app/router.dart';
 import 'package:madagascar_workcoode/core/service_locator.dart';
 import 'package:madagascar_workcoode/presentation/explorer/bloc/explorer_bloc.dart';
+import 'package:madagascar_workcoode/presentation/headline/tree_view_type_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class App extends StatelessWidget {
@@ -17,6 +18,11 @@ class App extends StatelessWidget {
         BlocProvider<DarkModeCubit>(
           create: (_) => DarkModeCubit(
             locator.get<SharedPreferences>().getBool("darkMode") ?? false,
+          ),
+        ),
+        BlocProvider<TreeViewTypeCubit>(
+          create: (_) => TreeViewTypeCubit(
+            locator.get<SharedPreferences>().getBool("viewType") ?? true,
           ),
         ),
         BlocProvider<ExplorerBloc>(

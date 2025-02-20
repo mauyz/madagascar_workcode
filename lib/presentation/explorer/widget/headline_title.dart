@@ -1,6 +1,10 @@
+import 'dart:math' show Random;
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:madagascar_workcoode/domain/model/headline.dart';
+import 'package:madagascar_workcoode/presentation/admob/interstitial_ad_manager.dart';
+import 'package:madagascar_workcoode/presentation/explorer/widget/articles_list_view.dart';
 
 class HeadlineTitle extends StatelessWidget {
   final Headline headline;
@@ -22,6 +26,13 @@ class HeadlineTitle extends StatelessWidget {
         child: InkWell(
           onTap: () {
             context.go("/headlines/$index");
+            final random = Random();
+            int numb1 = (random.nextDouble() * (11 - 1)).toInt();
+            int numb2 = (random.nextDouble() * (11 - 1)).toInt();
+            int numb3 = (random.nextDouble() * (11 - 1)).toInt();
+            if (index == numb1 || index == numb2 || index == numb3) {
+              InterstitialAdManager.show();
+            }
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -42,32 +53,11 @@ class HeadlineTitle extends StatelessWidget {
                   child: Text(
                     '(Art.${headline.allArticles.first.number} - '
                     'Art.${headline.allArticles.last.number})',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w300
-                    ),
+                    style: const TextStyle(fontWeight: FontWeight.w300),
                   ),
                 ),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxHeight: 40),
-                  child: CarouselView.weighted(
-                    onTap: (value) {
-                      final article = headline.allArticles[value];
-                      context.go("/articles/${article.number}");
-                    },
-                    backgroundColor:
-                        Theme.of(context).colorScheme.secondaryContainer,
-                    flexWeights: const <int>[2, 2, 2],
-                    consumeMaxWeight: true,
-                    children: headline.allArticles.map(
-                      (e) {
-                        return Center(
-                          child: Text(
-                            "Art. ${e.number}",
-                          ),
-                        );
-                      },
-                    ).toList(),
-                  ),
+                ArticlesListView(
+                  headline: headline,
                 ),
               ],
             ),

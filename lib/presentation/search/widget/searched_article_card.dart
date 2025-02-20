@@ -16,6 +16,7 @@ class SearchedArticleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 1.5,
       color: Theme.of(context).colorScheme.onSecondary.withValues(
             alpha: 0.5,
           ),

@@ -3,8 +3,9 @@ import 'package:madagascar_workcoode/domain/model/chapter.dart';
 import 'package:madagascar_workcoode/domain/model/section.dart';
 import 'package:madagascar_workcoode/domain/model/subsection.dart';
 import 'package:madagascar_workcoode/domain/model/symbol_section.dart';
+import 'package:madagascar_workcoode/domain/model/tree_object.dart';
 
-class Headline {
+class Headline extends TreeObject{
   final String value;
   final String text;
   final List<Chapter>? chapters;
@@ -88,5 +89,10 @@ class Headline {
       (a, b) => a.number.compareTo(b.number),
     );
     return articleList;
+  }
+
+  @override
+  String getTreeTitle() {
+    return text;
   }
 }

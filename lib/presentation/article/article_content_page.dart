@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:madagascar_workcoode/presentation/admob/ad_banner_cubit.dart';
+import 'package:madagascar_workcoode/presentation/admob/ad_banner_widget.dart';
 import 'package:madagascar_workcoode/presentation/explorer/bloc/explorer_bloc.dart';
 import 'package:madagascar_workcoode/presentation/explorer/bloc/explorer_state.dart';
 import 'package:madagascar_workcoode/presentation/not_found_page.dart';
@@ -45,18 +48,33 @@ class ArticleContentPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                body: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 12.0,
-                    right: 12.0,
-                    left: 12.0,
-                  ),
-                  child: SelectableText(
-                    article.content,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w500,
+                body: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 12.0,
+                          right: 12.0,
+                          left: 12.0,
+                          bottom: 5.0,
+                        ),
+                        child: SelectableText(
+                          article.content,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    if (!kIsWeb)
+                      BlocProvider<AdBannerCubit>(
+                        create: (context) => AdBannerCubit(null),
+                        child: const SafeArea(
+                          child: AdBannerWidget(),
+                        ),
+                      ),
+                  ],
                 ),
               );
             }

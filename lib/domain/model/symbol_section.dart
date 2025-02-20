@@ -1,6 +1,7 @@
 import 'package:madagascar_workcoode/domain/model/article.dart';
+import 'package:madagascar_workcoode/domain/model/tree_object.dart';
 
-class SymbolSection {
+class SymbolSection extends TreeObject {
   final String value;
   final String text;
   final List<Article> articles;
@@ -26,5 +27,10 @@ class SymbolSection {
       'text': text,
       'articles': articles.map((article) => article.toJson()).toList(),
     };
+  }
+
+  @override
+  String getTreeTitle() {
+    return "$value : $text";
   }
 }

@@ -1,0 +1,4 @@
+- Explorer chaque titre (chapitre, section, sous-section,...)
+- Lire la version PDF
+- Rechercher des mots clés
+- Mise à jour du design

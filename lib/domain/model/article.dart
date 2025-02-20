@@ -1,4 +1,6 @@
-class Article {
+import 'package:madagascar_workcoode/domain/model/tree_object.dart';
+
+class Article extends TreeObject {
   final int number;
   final String title;
   final String content;
@@ -16,5 +18,10 @@ class Article {
       'title': title,
       'content': content,
     };
+  }
+
+  @override
+  String getTreeTitle() {
+    return title;
   }
 }

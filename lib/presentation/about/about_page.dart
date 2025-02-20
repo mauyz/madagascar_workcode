@@ -1,9 +1,14 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:madagascar_workcoode/core/app_constants.dart';
+import 'package:madagascar_workcoode/presentation/admob/ad_banner_cubit.dart';
+import 'package:madagascar_workcoode/presentation/admob/ad_banner_widget.dart';
+import 'package:madagascar_workcoode/presentation/admob/interstitial_ad_manager.dart';
 import 'package:open_store/open_store.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -65,7 +70,10 @@ class AboutPage extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 1.0),
+                        padding: const EdgeInsets.only(
+                          top: 1.0,
+                          bottom: 8.0,
+                        ),
                         child: SelectableLinkify(
                           text: "${AppConstants.aboutApp} "
                               "\n\n${AppConstants.appClause}",
@@ -77,6 +85,10 @@ class AboutPage extends StatelessWidget {
                           },
                         ),
                       ),
+                      Text(
+                        AppConstants.copyright,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )
                     ],
                   ),
                 ),
@@ -155,36 +167,43 @@ class AboutPage extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        showLicensePage(
-                          context: context,
-                          applicationName: AppConstants.appTitle,
-                          applicationVersion: AppConstants.appVersion,
-                          applicationIcon: CircleAvatar(
-                            maxRadius: 30,
-                            backgroundColor: Colors.transparent,
-                            child: Image.asset(
-                              "assets/icon.png",
-                            ),
-                          ),
-                          applicationLegalese:
-                              "${AppConstants.appClause}\n\n${AppConstants.copyright}",
+                        final themes = InheritedTheme.capture(
+                          from: context,
+                          to: Navigator.of(
+                            context,
+                            rootNavigator: false,
+                          ).context,
                         );
+                        Navigator.of(context, rootNavigator: false)
+                            .push(
+                              MaterialPageRoute<void>(
+                                builder: (_) => themes.wrap(
+                                  LicensePage(
+                                    applicationName: AppConstants.appTitle,
+                                    applicationVersion: AppConstants.appVersion,
+                                    applicationIcon: CircleAvatar(
+                                      maxRadius: 30,
+                                      backgroundColor: Colors.transparent,
+                                      child: Image.asset(
+                                        "assets/icon.png",
+                                      ),
+                                    ),
+                                    applicationLegalese:
+                                        "${AppConstants.appClause}\n\n"
+                                        "${AppConstants.copyright}",
+                                  ),
+                                ),
+                              ),
+                            )
+                            .whenComplete(() => InterstitialAdManager.show());
                       },
                     ),
                   ),
-                  Divider(
-                    height: 0.1,
-                  ),
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0),
-                      child: Text(
-                        AppConstants.copyright,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.labelSmall,
-                      ),
+                  if (!kIsWeb)
+                    BlocProvider<AdBannerCubit>(
+                      create: (context) => AdBannerCubit(null),
+                      child: const AdBannerWidget(),
                     ),
-                  ),
                 ],
               ),
             ),
