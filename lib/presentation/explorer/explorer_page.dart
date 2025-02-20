@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:madagascar_workcoode/presentation/admob/ad_banner_cubit.dart';
+import 'package:madagascar_workcoode/presentation/admob/ad_banner_widget.dart';
 import 'package:madagascar_workcoode/presentation/explorer/bloc/explorer_bloc.dart';
 import 'package:madagascar_workcoode/presentation/explorer/bloc/explorer_event.dart';
 import 'package:madagascar_workcoode/presentation/explorer/bloc/explorer_state.dart';
@@ -32,8 +35,22 @@ class ExplorerPage extends StatelessWidget {
                 ],
               ),
             ),
-          ExplorerSuccess() => HeadlineListview(
-              headlines: state.workCode.headlines,
+          ExplorerSuccess() => Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  child: HeadlineListview(
+                    headlines: state.workCode.headlines,
+                  ),
+                ),
+                if (!kIsWeb)
+                  BlocProvider<AdBannerCubit>(
+                    create: (context) => AdBannerCubit(null),
+                    child: const SafeArea(
+                      child: AdBannerWidget(),
+                    ),
+                  ),
+              ],
             ),
         };
       },

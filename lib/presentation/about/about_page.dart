@@ -184,9 +184,9 @@ class AboutPage extends StatelessWidget {
                     ),
                   ),
                   if (!kIsWeb)
-                    SafeArea(
-                      child: BlocProvider<AdBannerCubit>(
-                        create: (context) => AdBannerCubit(null),
+                    BlocProvider<AdBannerCubit>(
+                      create: (context) => AdBannerCubit(null),
+                      child: const SafeArea(
                         child: AdBannerWidget(),
                       ),
                     ),
