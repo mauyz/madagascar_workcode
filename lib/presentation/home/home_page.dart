@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:madagascar_workcoode/app/bloc/dark_mode_cubit.dart';
 import 'package:madagascar_workcoode/presentation/about/about_page.dart';
+import 'package:madagascar_workcoode/presentation/admob/interstitial_ad_manager.dart';
 import 'package:madagascar_workcoode/presentation/explorer/explorer_page.dart';
 import 'package:madagascar_workcoode/presentation/home/navigation_cubit.dart';
 import 'package:madagascar_workcoode/presentation/pdf/pdf_view_page.dart';
@@ -36,6 +37,9 @@ class HomePage extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     BlocProvider.of<DarkModeCubit>(context).update();
+                    if (BlocProvider.of<DarkModeCubit>(context).state) {
+                      InterstitialAdManager.show();
+                    }
                   },
                   icon: Icon(
                     Theme.of(context).brightness == Brightness.dark
