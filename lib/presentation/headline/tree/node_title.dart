@@ -17,31 +17,26 @@ class NodeTitle extends StatelessWidget {
     if (node.data is! Article) {
       final bool isParentNode = node.children.isNotEmpty;
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             if (isParentNode)
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    100,
-                  ),
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
+              CircleAvatar(
+                maxRadius: 10,
                 child: Icon(
                   node.isExpanded ? Icons.remove : Icons.add,
-                  size: 18,
+                  size: 16,
                 ),
               ),
             const SizedBox(width: 8.0),
             Expanded(
               child: Text(
                 node.data!.getTreeTitle(),
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
