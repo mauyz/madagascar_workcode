@@ -66,7 +66,7 @@ class _HeadlinePageState extends State<HeadlinePage> {
                       actions: [
                         Padding(
                           padding: const EdgeInsets.only(right: 5.0),
-                          child: IconButton(
+                          child: IconButton.filledTonal(
                             onPressed: () {
                               context.read<TreeViewTypeCubit>().toggle();
                               tree = _getTreeNode(headline);

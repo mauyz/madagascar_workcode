@@ -8,7 +8,7 @@ class TreeViewTypeCubit extends Cubit<bool> {
   
   void toggle() {
     final sharedPreferences = locator.get<SharedPreferences>();
-    final newViewType = !(sharedPreferences.getBool("viewType") ?? false);
+    final newViewType = !(sharedPreferences.getBool("viewType") ?? true);
     sharedPreferences.setBool("viewType", newViewType);
     emit(newViewType);
   }
