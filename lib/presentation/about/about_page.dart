@@ -176,26 +176,30 @@ class AboutPage extends StatelessWidget {
                         );
                         Navigator.of(context, rootNavigator: false)
                             .push(
-                              MaterialPageRoute<void>(
-                                builder: (_) => themes.wrap(
-                                  LicensePage(
-                                    applicationName: AppConstants.appTitle,
-                                    applicationVersion: AppConstants.appVersion,
-                                    applicationIcon: CircleAvatar(
-                                      maxRadius: 30,
-                                      backgroundColor: Colors.transparent,
-                                      child: Image.asset(
-                                        "assets/icon.png",
-                                      ),
-                                    ),
-                                    applicationLegalese:
-                                        "${AppConstants.appClause}\n\n"
-                                        "${AppConstants.copyright}",
+                          MaterialPageRoute<void>(
+                            builder: (_) => themes.wrap(
+                              LicensePage(
+                                applicationName: AppConstants.appTitle,
+                                applicationVersion: AppConstants.appVersion,
+                                applicationIcon: CircleAvatar(
+                                  maxRadius: 30,
+                                  backgroundColor: Colors.transparent,
+                                  child: Image.asset(
+                                    "assets/icon.png",
                                   ),
                                 ),
+                                applicationLegalese:
+                                    "${AppConstants.appClause}\n\n"
+                                    "${AppConstants.copyright}",
                               ),
-                            )
-                            .whenComplete(() => InterstitialAdManager.show());
+                            ),
+                          ),
+                        )
+                            .whenComplete(() {
+                          if (!kIsWeb) {
+                            InterstitialAdManager.show();
+                          }
+                        });
                       },
                     ),
                   ),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -37,7 +38,8 @@ class HomePage extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     BlocProvider.of<DarkModeCubit>(context).update();
-                    if (BlocProvider.of<DarkModeCubit>(context).state) {
+                    if (BlocProvider.of<DarkModeCubit>(context).state &&
+                        !kIsWeb) {
                       InterstitialAdManager.show();
                     }
                   },
