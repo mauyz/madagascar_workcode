@@ -11,15 +11,19 @@ class AdBannerCubit extends Cubit<BannerAd?> {
     return super.close();
   }
 
-  void loadAd(double screenWith) async {
-    await state?.dispose();
-    final AnchoredAdaptiveBannerAdSize? size =
-        await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+  void loadAd(
+    double screenWith, {
+    bool? forceLoad,
+  }) async {
+    final size = await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
       screenWith.truncate(),
     );
-    if (size == null) {
+    if ((state != null && forceLoad != true) || size == null) {
       return;
     }
+    await state?.dispose();
+    emit(null);
+    debugPrint("Load banner");
     BannerAd(
       adUnitId: kDebugMode
           ? 'ca-app-pub-3940256099942544/6300978111'
@@ -31,7 +35,6 @@ class AdBannerCubit extends Cubit<BannerAd?> {
           emit(ad as BannerAd);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          debugPrint(error.toString());
           ad.dispose();
         },
       ),
